@@ -16,7 +16,6 @@ class WeatherController extends Controller
         foreach ($users as $user) {
             $latitude = $user->latitude;
             $longitude = $user->longitude;
-
             $cachedData = Cache::get('weather-' . $latitude . '-' . $longitude);
             if ($cachedData) {
                 $cachedTimestamp = $cachedData['timestamp'];
@@ -58,12 +57,6 @@ class WeatherController extends Controller
         $formattedData = [];
 
         foreach ($weatherData as $data) {
-//            $formattedData[] = [
-//                'user' => $data['user'],
-//                'location' => $data['weather']['name'],
-//                'description' => $data['weather']['weather'][0]['description'],
-//                'temperature' => $data['weather']['main']['temp'],
-//            ];
             $formattedData[] = [
                 'id' => $data['user']['id'],
                 'name' => $data['user']['name'],
