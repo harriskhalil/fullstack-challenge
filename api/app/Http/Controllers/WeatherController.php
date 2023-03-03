@@ -20,7 +20,7 @@ class WeatherController extends Controller
             $cachedData = Cache::get('weather-' . $latitude . '-' . $longitude);
             if ($cachedData) {
                 $cachedTimestamp = $cachedData['timestamp'];
-                if (time() - $cachedTimestamp < 3600) { // check if cached data is less than 1 hour old
+                if (time() - $cachedTimestamp < 3600) {
                     $weatherData[] = [
                         'user' => $user->toArray(),
                         'weather' => $cachedData['data'],
@@ -37,6 +37,7 @@ class WeatherController extends Controller
                     'units' => 'metric',
                 ]);
             } catch (\Illuminate\Http\Client\RequestException $e) {
+
                 abort(500, 'Failed to retrieve weather data: ' . $e->getMessage());
             }
 
@@ -57,15 +58,31 @@ class WeatherController extends Controller
         $formattedData = [];
 
         foreach ($weatherData as $data) {
+//            $formattedData[] = [
+//                'user' => $data['user'],
+//                'location' => $data['weather']['name'],
+//                'description' => $data['weather']['weather'][0]['description'],
+//                'temperature' => $data['weather']['main']['temp'],
+//            ];
             $formattedData[] = [
-                'user' => $data['user'],
-                'location' => $data['weather']['name'],
+                'id' => $data['user']['id'],
+                'name' => $data['user']['name'],
+                'email' => $data['user']['email'],
+                'email_verified_at' => $data['user']['email_verified_at'],
+                'created_at' => $data['user']['created_at'],
+                'updated_at' => $data['user']['updated_at'],
+                'latitude' => $data['user']['latitude'],
+                'longitude' => $data['user']['longitude'],
                 'description' => $data['weather']['weather'][0]['description'],
+                'location' => $data['weather']['name'],
                 'temperature' => $data['weather']['main']['temp'],
             ];
         }
-
-        return $formattedData;
+        return [
+            'status'=>'Success',
+            'message'=>'Users Fetched Successfully',
+            'data'=>$formattedData
+        ];
 
     }
 }
