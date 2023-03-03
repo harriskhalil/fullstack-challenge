@@ -20,3 +20,5 @@ Route::get('/', function () {
         'users' => \App\Models\User::all(),
     ]);
 });
+
+Route::get('/weather',[\App\Http\Controllers\WeatherController::class,'weather']);

@@ -10,8 +10,16 @@
 
 <script>
 import { defineComponent } from 'vue'
+import {mapActions} from "pinia";
+import {useCounterStore} from "stores/example-store";
 
 export default defineComponent({
-  name: 'IndexPage'
+  name: 'IndexPage',
+  created() {
+    this.getdata()
+  },
+  methods:{
+    ...mapActions(useCounterStore,['getdata'])
+  }
 })
 </script>
