@@ -52,6 +52,29 @@ module.exports = configure(function (/* ctx */) {
         browser: [ 'es2019', 'edge88', 'firefox78', 'chrome87', 'safari13.1' ],
         node: 'node16'
       },
+      theme: {
+        dark: true,
+        themes: {
+          light: {
+            primary: '#2196F3',
+            secondary: '#424242',
+            accent: '#FF4081',
+            error: '#FF5252',
+            info: '#2196F3',
+            success: '#4CAF50',
+            warning: '#FFC107'
+          },
+          dark: {
+            primary: '#1E88E5',
+            secondary: '#616161',
+            accent: '#E91E63',
+            error: '#FF5252',
+            info: '#2196F3',
+            success: '#4CAF50',
+            warning: '#FFC107'
+          }
+        }
+      },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env:require('dotenv').config().parsed,

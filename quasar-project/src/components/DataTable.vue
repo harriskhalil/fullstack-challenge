@@ -12,6 +12,7 @@
 <script>
 export default {
   name: 'DataTable',
+  emits:['rowClick'],
   props: {
     title: {
       type: String,
@@ -28,7 +29,7 @@ export default {
   },
   methods: {
     onRowClick(event, row) {
-      console.log(row)
+      this.$emit('rowClick',row)
 
     }
   }
