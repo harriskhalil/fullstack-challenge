@@ -102,7 +102,6 @@ export default defineComponent({
   components: {
     EssentialLink
   },
-
   setup() {
     const leftDrawerOpen = ref(false)
 
